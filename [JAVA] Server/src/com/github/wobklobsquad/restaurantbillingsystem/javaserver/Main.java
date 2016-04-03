@@ -23,18 +23,32 @@ public class Main extends Thread
       {
          try
          {
-            System.out.println("Waiting for client on port " +
-            serverSocket.getLocalPort() + "...");
+            System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
             Socket server = serverSocket.accept();
-            System.out.println("Just connected to "
-                  + server.getRemoteSocketAddress());
-            DataInputStream in =
-                  new DataInputStream(server.getInputStream());
+            System.out.println("Just connected to " + server.getRemoteSocketAddress());
+            DataInputStream in = new DataInputStream(server.getInputStream());
             System.out.println(in.readUTF());
-            DataOutputStream out =
-                 new DataOutputStream(server.getOutputStream());
-            out.writeUTF("Thank you for connecting to "
-              + server.getLocalSocketAddress() + "\nGoodbye!");
+            DataOutputStream out = new DataOutputStream(server.getOutputStream());
+            
+            String addCmd = "add";
+            String removeCmd = "remove";
+            
+            String[] cmd = in.readUTF().split(" ");
+            
+            // Check if there is the add command
+            if(cmd[0] == addCmd) {
+            	if(cmd[1] == "water") {
+            		out.writeUTF("Succesfully added the water to the list");
+            	}
+            }
+
+            // Check if there is the remove command
+            if(cmd[0] == removeCmd) {
+            	if(cmd[1] == "water") {
+            		out.writeUTF("Succesfully removed the water to the list");
+            	}
+            }
+            
             server.close();
          }catch(SocketTimeoutException s)
          {
