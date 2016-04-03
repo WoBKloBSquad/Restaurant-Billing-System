@@ -1,0 +1,31 @@
+package com.github.wobklobsquad.restaurantbillingsystem.javaserver;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Main {
+
+	private static int port = 4000;
+	
+	public static void main(String args[]) {
+		try {
+			InetAddress host = InetAddress.getLocalHost();
+			String hostIP = host.toString();
+			ObjectInputStream ois = new ObjectInputStream(new Socket(hostIP + "", port).getInputStream());
+			String message = (String) ois.readObject();
+			
+			ois.close();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+}
