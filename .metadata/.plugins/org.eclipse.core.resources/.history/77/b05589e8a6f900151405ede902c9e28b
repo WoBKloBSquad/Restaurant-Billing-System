@@ -1,0 +1,19 @@
+package com.github.wobklobsquad.restaurantbillingsystem.javaserver;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class Main {
+
+	public void run() {
+		try {
+			InetAddress host = InetAddress.getLocalHost();
+			int port = 4000;
+			String hostIP = host.toString();
+			Socket socket = new Socket(hostIP + port)
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}
