@@ -27,25 +27,26 @@ public class Main extends Thread
             Socket server = serverSocket.accept();
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             DataInputStream in = new DataInputStream(server.getInputStream());
-            System.out.println(in.readUTF());
             DataOutputStream out = new DataOutputStream(server.getOutputStream());
             
             String addCmd = "add";
             String removeCmd = "remove";
             
-            String[] cmd = in.readUTF().split(" ");
+            String[] cmd = in.readUTF().split("-");
             
             // Check if there is the add command
             if(cmd[0] == addCmd) {
-            	if(cmd[1] == "water") {
+            	if(cmd[1] == Products.water) {
             		out.writeUTF("Succesfully added the water to the list");
+            		System.out.println("Succesfully added the water to the list");
             	}
             }
 
             // Check if there is the remove command
             if(cmd[0] == removeCmd) {
-            	if(cmd[1] == "water") {
+            	if(cmd[1] == Products.water) {
             		out.writeUTF("Succesfully removed the water to the list");
+            		System.out.println("Succesfully removed the water to the list");
             	}
             }
             
@@ -64,14 +65,18 @@ public class Main extends Thread
    
    public static void main(String args[])
    {
-      int port = Integer.parseInt(args[0]);
-      try
-      {
-         Thread t = new Main(port);
-         t.start();
-      }catch(IOException e)
-      {
-         e.printStackTrace();
-      }
+	   if(args[0] == null) {
+		   System.out.println("[SERVERE]: No argument for the port described! E.g.: java Server.jar [PORT]");
+	  } else {
+	      int port = Integer.parseInt(args[0]);
+	      try
+	      {
+	         Thread t = new Main(port);
+	         t.start();
+	      }catch(IOException e)
+	      {
+	         e.printStackTrace();
+	      }
+	  }
    }
 }

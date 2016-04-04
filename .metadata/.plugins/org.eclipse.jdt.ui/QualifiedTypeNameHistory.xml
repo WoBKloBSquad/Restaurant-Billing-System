@@ -7,4 +7,6 @@
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
 <fullyQualifiedTypeName name="java.io.DataInputStream"/>
+<fullyQualifiedTypeName name="com.github.wobklobsquad.restaurantbillingsystem.javaserver.Server"/>
+<fullyQualifiedTypeName name="com.github.wobklobsquad.restaurantbillingsystem.javaserver.Products"/>
 </qualifiedTypeNameHistroy>

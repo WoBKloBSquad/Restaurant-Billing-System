@@ -1,0 +1,81 @@
+package com.github.wobklobsquad.restaurantbillingsystem.javaserver;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+
+public class Main extends Thread
+{
+   private ServerSocket serverSocket;
+   
+   public Main(int port) throws IOException
+   {
+      serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(10000);
+   }
+
+   public void run()
+   {
+      while(true)
+      {
+         try
+         {
+            System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
+            Socket server = serverSocket.accept();
+            System.out.println("Just connected to " + server.getRemoteSocketAddress());
+            DataInputStream in = new DataInputStream(server.getInputStream());
+            System.out.println(in.readUTF());
+            DataOutputStream out = new DataOutputStream(server.getOutputStream());
+            
+            String addCmd = "add";
+            String removeCmd = "remove";
+            
+            String[] cmd = in.readUTF().split(" ");
+            
+            // Check if there is the add command
+            if(cmd[0] == addCmd) {
+            	if(cmd[1] == Products.water) {
+            		out.writeUTF("Succesfully added the water to the list");
+            	}
+            }
+
+            // Check if there is the remove command
+            if(cmd[0] == removeCmd) {
+            	if(cmd[1] == Products.water) {
+            		out.writeUTF("Succesfully removed the water to the list");
+            	}
+            }
+            
+            server.close();
+         }catch(SocketTimeoutException s)
+         {
+            System.out.println("Socket timed out!");
+            break;
+         }catch(IOException e)
+         {
+            e.printStackTrace();
+            break;
+         }
+      }
+   }
+   
+   public static void main(String args[])
+   {
+	   if(args[0].toString() == "") {
+		   System.out.println("[SERVERE]: No argument for the port described! E.g.: java Server.jar [PORT]");
+	  } else {
+	      int port = Integer.parseInt(args[0]);
+	      try
+	      {
+	         Thread t = new Main(port);
+	         t.start();
+	      }catch(IOException e)
+	      {
+	         e.printStackTrace();
+	      }
+	  }
+   }
+}

@@ -1,0 +1,32 @@
+package com.github.wobklobsquad.restaurantbillingsystem.javaserver;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+
+public class Main extends Thread
+{
+	
+	private ServerSocket serverSocket;
+		
+ 	public Server(int port) throws IOException {
+      serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(10000);
+   }
+   
+   public static void main(String args[])
+   {
+      int port = Integer.parseInt(args[0]);
+      try
+      {
+         Thread t = new Srv(port);
+         t.start();
+      }catch(IOException e)
+      {
+         e.printStackTrace();
+      }
+   }
+}

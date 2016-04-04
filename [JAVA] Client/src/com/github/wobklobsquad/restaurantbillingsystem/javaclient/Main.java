@@ -14,7 +14,7 @@ public class Main {
 		String serverName = args[0];
 		int port = Integer.parseInt(args[1]);
 		String cmd = args[2];
-		String item = args[3];
+		String product = args[3];
 		try
 		{
 			Socket client = new Socket(serverName, port);
@@ -22,7 +22,7 @@ public class Main {
 			DataOutputStream out = new DataOutputStream(outToServer);
          
 			//Send the message from the third argument
-			out.writeUTF(cmd + " " + item);
+			out.writeUTF(cmd + "-" + product);
          
 			InputStream inFromServer = client.getInputStream();
 			DataInputStream in = new DataInputStream(inFromServer);
