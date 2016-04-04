@@ -1,0 +1,5 @@
+package com.github.wobklobsquad.restaurantbillingsystem.javaserver.products;
+
+public class ProdWater {
+
+}
