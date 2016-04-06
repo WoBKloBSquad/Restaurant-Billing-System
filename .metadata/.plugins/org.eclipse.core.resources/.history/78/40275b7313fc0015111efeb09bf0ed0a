@@ -28,7 +28,8 @@ public class Main {
 			DataInputStream in = new DataInputStream(inFromServer);
          
 			//Get the message from the server
-			System.out.println(in.readUTF().toString());
+			String message = in.readUTF().toString();
+			System.out.println(message);
          
 			client.close();
       }catch(IOException e)

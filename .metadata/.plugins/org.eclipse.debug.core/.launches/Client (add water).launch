@@ -7,6 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.github.wobklobsquad.restaurantbillingsystem.javaclient.Main"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="84.31.197.176 4000 add water"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="84.31.197.176 4000 add-water"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="[JAVA] Client"/>
 </launchConfiguration>

@@ -22,13 +22,13 @@ public class Main {
 			DataOutputStream out = new DataOutputStream(outToServer);
          
 			//Send the message from the third argument
-			out.writeUTF(cmd[0] + "-" + cmd[1]);
+			out.writeUTF(cmd + "-" + product);
          
 			InputStream inFromServer = client.getInputStream();
 			DataInputStream in = new DataInputStream(inFromServer);
          
 			//Get the message from the server
-			System.out.println(in.readUTF().toString());
+			System.out.println(in.readUTF());
          
 			client.close();
       }catch(IOException e)

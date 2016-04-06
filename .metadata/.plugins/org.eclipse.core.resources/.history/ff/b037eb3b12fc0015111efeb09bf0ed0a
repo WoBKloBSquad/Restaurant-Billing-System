@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class Main extends Thread
 {
@@ -13,6 +14,7 @@ public class Main extends Thread
    public Main(int port) throws IOException
    {
       serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(10000);
    }
 
    public void run()
@@ -38,7 +40,7 @@ public class Main extends Thread
             }
 
             // Check if there is the remove command
-            if(cmd[0] == Commands.remove) {
+            if(cmd[0] == removeCmd) {
             	if(cmd[1] == Products.water) {
             		out.writeUTF("Succesfully removed the water to the list");
             		System.out.println("Succesfully removed the water to the list");
@@ -46,6 +48,10 @@ public class Main extends Thread
             }
             
             server.close();
+         }catch(SocketTimeoutException s)
+         {
+            System.out.println("Socket timed out!");
+            break;
          }catch(IOException e)
          {
             e.printStackTrace();

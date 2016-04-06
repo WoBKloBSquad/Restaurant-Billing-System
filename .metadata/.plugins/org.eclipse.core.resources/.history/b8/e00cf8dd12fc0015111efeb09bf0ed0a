@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class Main extends Thread
 {
@@ -13,6 +14,7 @@ public class Main extends Thread
    public Main(int port) throws IOException
    {
       serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(100000);
    }
 
    public void run()
@@ -46,6 +48,10 @@ public class Main extends Thread
             }
             
             server.close();
+         }catch(SocketTimeoutException s)
+         {
+            System.out.println("Socket timed out!");
+            break;
          }catch(IOException e)
          {
             e.printStackTrace();

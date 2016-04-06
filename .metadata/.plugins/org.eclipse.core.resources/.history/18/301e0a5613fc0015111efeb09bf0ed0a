@@ -32,7 +32,7 @@ public class Main extends Thread
             // Check if there is the add command
             if(cmd[0] == Commands.add) {
             	if(cmd[1] == Products.water) {
-            		out.writeUTF("Succesfully added the water to the list");
+            		out.writeUTF("Added");
             		System.out.println("Succesfully added the water to the list");
             	}
             }
